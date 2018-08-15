@@ -3,7 +3,9 @@ package com.emp.data.process;
 import java.io.Console;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -68,7 +70,7 @@ public class EmployeeDataProcessor {
 						StoreInFile storeInFileFull = new StoreInFile("C:/Test/Employee/EmpFullDetails.txt");
 						StoreInFile storeInFileRatio = new StoreInFile("C:/Test/Employee/EmpRatioDetails.txt");
 						System.out.println("recordsInsertList = " + recordsInsertList);
-						recordsInsertList.stream().forEach(emp -> {
+						Optional.ofNullable(recordsInsertList).orElse(Collections.emptyList()).stream().forEach(emp -> {
 							String fullData = (emp.getOrganization() + "," + emp.getExperience() + ","
 									+ emp.getEmpFirstName() + "," + emp.getEmpLastName()).trim();
 							double ratio = (emp.getExperience() / emp.getAge());
@@ -81,6 +83,9 @@ public class EmployeeDataProcessor {
 						System.out.println("Data Storing to Files completed.");
 						storeInFileFull.closeFileWriter();
 						storeInFileRatio.closeFileWriter();
+						if(recordsInsertList != null && recordsInsertList.size() > 0){
+							recordsInsertList.clear();
+						}
 					}
 				}
 			});
