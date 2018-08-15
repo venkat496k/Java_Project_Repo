@@ -16,6 +16,7 @@ import com.emp.data.filestore.StoreInFile;
 public class EmployeeDataProcessor {
 	static String numRegex = "^[0-9]+$";
 	static List<Employee> recordsInsertList = new ArrayList<Employee>();
+	static String fileStorePath = "C:/Test/Employee";
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -67,8 +68,8 @@ public class EmployeeDataProcessor {
 					}
 					if (line.indexOf(",") < 0 && "sort".equalsIgnoreCase(line)) {
 						System.out.println("SORT Keyword Encountered");
-						StoreInFile storeInFileFull = new StoreInFile("C:/Test/Employee/EmpFullDetails.txt");
-						StoreInFile storeInFileRatio = new StoreInFile("C:/Test/Employee/EmpRatioDetails.txt");
+						StoreInFile storeInFileFull = new StoreInFile(fileStorePath + "/" + "EmpFullDetails.txt");
+						StoreInFile storeInFileRatio = new StoreInFile(fileStorePath + "/" + "EmpRatioDetails.txt");
 						System.out.println("recordsInsertList = " + recordsInsertList);
 						Optional.ofNullable(recordsInsertList).orElse(Collections.emptyList()).stream().forEach(emp -> {
 							String fullData = (emp.getOrganization() + "," + emp.getExperience() + ","
