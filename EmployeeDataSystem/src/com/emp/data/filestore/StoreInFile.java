@@ -25,6 +25,12 @@ public class StoreInFile {
 	public void writeToFile(String data) {
 		try {
 			fileWriter.write(data + "\n");
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
